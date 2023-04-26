@@ -1,4 +1,5 @@
 // TODO: Include packages needed for this application
+// I think this is done?
 
 // TODO: Create an array of questions for user input
 const questions = [];
