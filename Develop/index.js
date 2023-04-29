@@ -1,17 +1,14 @@
-// TODO: Include packages needed for this application
-// const fs = require('fs');
 const { writeFile } = require('fs').promises;
 
 const inquirer = require('inquirer');
 const createMd = require('./utils/generateMarkdown');
 const licenses = require('./utils/license-data');
 
-const licenseNames = Object.values(licenses).map((license) => {
-    // console.log("Licenses:", license.name);
-    return license.name;
-});
+// extracts all of the names of the licenses from license-data.js. 
+// This is used in a prompt from questions() to allow the user to select a license
+const licenseNames = Object.values(licenses).map((license) => {return license.name;});
 
-// TODO: Create an array of questions for user input
+// A series of questions for the user to answer on the cli.
 const questions = () => {
     return inquirer.prompt([
         {
@@ -21,8 +18,18 @@ const questions = () => {
         },
         {
             type: 'input',
+            name: 'email',
+            message: 'What is your email?'
+        },
+        {
+            type: 'input',
             name: 'title',
             message: 'What is the title of your project?'
+        },
+        {
+            type: 'input',
+            name: 'githubUser',
+            message: 'What is your GitHub username?'
         },
         {
             type: 'input',
@@ -122,17 +129,12 @@ const questions = () => {
             name: 'tests',
             message: 'Add examples on how to run your tests.',
             when: function(answers) {return answers.isTests;}
-        }
+        },
     ]);
 };
 
-// TODO: Create a function to write README file
-// TODO: use generatemarkdown func here
-// function writeToFile(fileName, data) {
-
-// };
-
-// TODO: Create a function to initialize app
+// Initiates the questions in a promise format
+// Creates a (or appends to an existing) README file in the root directory of the repo
 function init() {
     questions()
         .then((answers) => writeFile('../README.md', createMd.generateMarkdown(answers)))
@@ -140,5 +142,4 @@ function init() {
         .catch((err) => console.error(err));
 };
 
-// Function call to initialize app
 init();
