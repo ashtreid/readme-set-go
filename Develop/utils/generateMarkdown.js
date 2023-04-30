@@ -174,7 +174,7 @@ ${tests(data)}
 
 ## [Questions?](#questions)
 If you have any questions about my project, please contact me via the following:\n
-**${data.name}**  |  *GitHub:* [${data.githubUser}](${data.github}  |  *Email:* ${data.email}
+**${data.name}**  |  *GitHub:* [${data.githubUser}](${data.github})  |  *Email:* ${data.email}
 `;
 }
 
